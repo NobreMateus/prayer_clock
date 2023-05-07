@@ -10,6 +10,7 @@ import 'package:prayer_clock/prayer_form/domain/use_cases/create_clock_use_case/
 import 'package:prayer_clock/prayer_form/domain/use_cases/create_prayer_use_case/create_prayer_use_case_impl.dart';
 import 'package:prayer_clock/prayer_form/domain/use_cases/fetch_all_prayers_use_case/fetch_all_prayers_use_case_impl.dart';
 import 'package:prayer_clock/prayer_form/domain/use_cases/fetch_available_pray_times_use_case/fetch_available_pray_times_impl.dart';
+import 'package:prayer_clock/prayer_form/domain/use_cases/fetch_clock_use_case/fetch_clock_use_case_impl.dart';
 import 'package:prayer_clock/prayer_form/presentation/create_clock/bloc/create_clock_bloc.dart';
 import 'package:prayer_clock/prayer_form/presentation/create_clock/create_clock_screen.dart';
 import 'package:prayer_clock/prayer_form/presentation/home_start/home_start.dart';
@@ -19,7 +20,7 @@ import 'prayer_form/presentation/prayer_form/form_screen/form_screen.dart';
 
 final themeData = ThemeData(
     scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1),
-    primaryColor: const Color.fromRGBO(242, 188, 40, 1));
+    primaryColor: const Color.fromRGBO(27, 70, 129, 1));
 
 void main() async {
   usePathUrlStrategy();
@@ -53,6 +54,7 @@ class PrayerForm extends StatelessWidget {
         createPrayerUseCase: CreatePrayerUseCaseImpl(repository: repository),
         fetchAvailablePrayTimesUseCase: FetchAvailablePrayTimesUseCaseImpl(repository: repository),
         checkClockExistanceUseCase: CheckClockExistanceUseCaseImpl(repository: repository),
+        fetchClockUseCase: FetchClockUseCaseImpl(repository: repository),
       ),
       child: const PrayFormScreen(),
     );

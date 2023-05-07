@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prayer_clock/prayer_form/domain/entities/clock.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/bloc/prayer_form_bloc.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/bloc/prayer_form_event.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/name_screen/name_screen.dart';
 
-class PhoneScreen extends StatelessWidget {
-  final _phoneFieldController = TextEditingController();
+class InformationScreen extends StatelessWidget {
+  final Clock clock;
 
-  PhoneScreen({super.key});
+  const InformationScreen({
+    Key? key,
+    required this.clock,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,14 @@ class PhoneScreen extends StatelessWidget {
     final bloc = context.read<PrayerFormBloc>();
     return Center(
       child: CustomCard(
+        height: null,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Digite seu telefone:"),
-            TextField(
-              controller: _phoneFieldController,
-              keyboardType: TextInputType.number,
-            ),
+            Text(clock.title, style: theme.textTheme.headlineMedium),
+            const SizedBox(height: 8),
+            Text(clock.description, style: theme.textTheme.bodyMedium),
             const SizedBox(height: 24),
             SizedBox(
               height: 36,
@@ -31,7 +34,7 @@ class PhoneScreen extends StatelessWidget {
               child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(theme.primaryColor)),
                 onPressed: () {
-                  bloc.add(NextOnPhoneScreen(phone: _phoneFieldController.text));
+                  bloc.add(NextOnShowInformations());
                 },
                 child: const Text("Avançar"),
               ),

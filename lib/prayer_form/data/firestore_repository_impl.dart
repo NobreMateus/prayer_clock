@@ -24,13 +24,18 @@ class FirestoreRepositoryImpl implements PrayerClockRepository {
     await _db.collection("pray-clocks").doc(request.code).set({
       'code': request.code,
       'title': request.title,
+      'description': request.description,
       'interval': request.interval,
     });
     final createEmptyPrayer = CreateEmptyPrayer();
     final emptyPrayers = createEmptyPrayer.create(request);
     await _saveEmptyPreayers(emptyPrayers, request.code);
     await Future.delayed(const Duration(seconds: 3));
-    return Clock(code: request.code, title: request.title);
+    return Clock(
+      code: request.code,
+      title: request.title,
+      description: request.description,
+    );
   }
 
   Future<void> _saveEmptyPreayers(List<EmptyPrayer> emptyPrayers, String clockId) async {
@@ -100,5 +105,16 @@ class FirestoreRepositoryImpl implements PrayerClockRepository {
       );
     });
     return prayers.toList();
+  }
+
+  @override
+  Future<Clock> fetchClock(String clockId) async {
+    final doc = await _db.collection('pray-clocks').doc(clockId).get();
+    final data = doc.data();
+    return Clock(
+      code: data?['code'] ?? '',
+      title: data?['title'] ?? '',
+      description: data?['description'] ?? '',
+    );
   }
 }

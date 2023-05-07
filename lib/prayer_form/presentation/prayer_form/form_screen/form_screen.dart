@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/bloc/prayer_form_bloc.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/bloc/prayer_form_event.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/bloc/prayer_form_state.dart';
+import 'package:prayer_clock/prayer_form/presentation/prayer_form/information_screen/information_screen.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/name_screen/name_screen.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/phone_screen/phone_screen.dart';
 import 'package:prayer_clock/prayer_form/presentation/prayer_form/pray_time_select_screen/pray_time_select_screen.dart';
@@ -25,6 +26,9 @@ class PrayFormScreen extends StatelessWidget {
               builder: (context, state) {
                 if (state is LoadingClockIdState) {
                   return const Center(child: CircularProgressIndicator());
+                }
+                if (state is ShowingInformations) {
+                  return InformationScreen(clock: state.clock);
                 }
                 if (state is WritingNameState) {
                   return NameScreen();

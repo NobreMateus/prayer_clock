@@ -55,6 +55,7 @@ class NewClockForm extends StatelessWidget {
   final _idController = TextEditingController();
   final _titleController = TextEditingController();
   final _intervalController = TextEditingController();
+  final _descriptionController = TextEditingController();
 
   NewClockForm({super.key});
 
@@ -72,6 +73,13 @@ class NewClockForm extends StatelessWidget {
           const Text('Titulo do Relogio'),
           TextField(controller: _titleController),
           const SizedBox(height: 12),
+          const Text('Descrição do Relogio'),
+          TextField(
+            controller: _descriptionController,
+            keyboardType: TextInputType.multiline,
+            minLines: 1,
+            maxLines: 10,
+          ),
           const Text('Intervalo do Relogio'),
           TextField(controller: _intervalController),
           const SizedBox(height: 12),
@@ -86,6 +94,7 @@ class NewClockForm extends StatelessWidget {
                     NewClockRequest(
                       code: _idController.text,
                       title: _titleController.text,
+                      description: _descriptionController.text,
                       interval: int.tryParse(_intervalController.text) ?? 15,
                     ),
                   ),

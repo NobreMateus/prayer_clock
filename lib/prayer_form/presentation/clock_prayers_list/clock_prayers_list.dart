@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayer_clock/prayer_form/domain/entities/prayer.dart';
 import 'package:prayer_clock/prayer_form/domain/use_cases/fetch_all_prayers_use_case/fetch_all_prayers_use_case.dart';
 
+//State
 abstract class ClockPrayersListState {}
 
 class ClockPrayersLoadingListState extends ClockPrayersListState {}
@@ -13,6 +14,7 @@ class ClockPrayersShowingPrayersState extends ClockPrayersListState {
   ClockPrayersShowingPrayersState(this.prayers);
 }
 
+//Cubit
 class ClockPrayersListCubit extends Cubit<ClockPrayersListState> {
   FetchAllPrayersUseCase fetchAllPrayersUseCase;
   String clockId;
@@ -30,6 +32,7 @@ class ClockPrayersListCubit extends Cubit<ClockPrayersListState> {
   }
 }
 
+//Screen
 class ClockPrayersList extends StatelessWidget {
   const ClockPrayersList({super.key});
 
@@ -42,7 +45,7 @@ class ClockPrayersList extends StatelessWidget {
         child: BlocBuilder<ClockPrayersListCubit, ClockPrayersListState>(
           builder: (context, state) {
             if (state is ClockPrayersLoadingListState) {
-              const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is ClockPrayersShowingPrayersState) {
               return ListView.separated(
@@ -57,20 +60,18 @@ class ClockPrayersList extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(24),
-                        child: Expanded(
-                          child: Row(
-                            children: [
-                              Text(
-                                state.prayers[index].prayTime.hour,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: theme.primaryColor,
-                                ),
+                        child: Row(
+                          children: [
+                            Text(
+                              state.prayers[index].prayTime.hour,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: theme.primaryColor,
                               ),
-                              const SizedBox(width: 12),
-                              Text(state.prayers[index].name),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(state.prayers[index].name),
+                          ],
                         ),
                       ),
                     );

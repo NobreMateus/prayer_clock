@@ -46,10 +46,12 @@ class NameScreen extends StatelessWidget {
 //TODO: Mover para arquivo proprio
 class CustomCard extends StatelessWidget {
   final Widget? child;
+  final double? height;
 
   const CustomCard({
     super.key,
     this.child,
+    this.height = 248,
   });
 
   @override
@@ -57,7 +59,7 @@ class CustomCard extends StatelessWidget {
     return Center(
       child: Container(
         decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
-        height: 248,
+        height: height,
         child: Padding(padding: const EdgeInsets.all(24.0), child: child),
       ),
     );

@@ -9,4 +9,5 @@ abstract class PrayerClockRepository {
   Future<List<PrayTime>> fetchAvailablePrayTimes(String clockId);
   Future<bool> clockExists(String clockId);
   Future<List<Prayer>> fetchAllPrayers(String clockId);
+  Future<Clock> fetchClock(String clockId);
 }

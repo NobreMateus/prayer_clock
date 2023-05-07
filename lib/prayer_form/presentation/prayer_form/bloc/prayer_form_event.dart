@@ -2,6 +2,8 @@ import 'package:prayer_clock/prayer_form/domain/entities/pray_time.dart';
 
 abstract class PrayerFormEvent {}
 
+class NextOnShowInformations extends PrayerFormEvent {}
+
 class NextOnNameScreen extends PrayerFormEvent {
   String name;
 
